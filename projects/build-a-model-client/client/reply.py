@@ -24,3 +24,30 @@ def usage_of(reply):
 
 def ask(model, messages, system=None, max_tokens=300):
     return model.chat(messages=messages, system=system, max_tokens=max_tokens)
+
+
+CONTINUE = "Continue exactly where you stopped. Repeat nothing."
+
+
+def ask_whole(call, messages, max_continues=2):
+    
+    reply = None
+    temp = ""
+    
+    while max_continues!=0:
+
+        reply = call(messages)
+        
+        if len(messages)>1:
+            max_continues-=1
+            if max_continues==0:
+                break
+        # print(reply)
+        if is_cut_off(reply)==True:
+            messages = messages + [assistant_message(text_of(reply))] + [user_message(CONTINUE)] 
+            temp += text_of(reply)
+            
+        else:
+            return ("".join([temp,text_of(reply)]), True)
+    
+    return ("".join([temp,text_of(reply)]), False)
