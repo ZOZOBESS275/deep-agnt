@@ -31,23 +31,20 @@ CONTINUE = "Continue exactly where you stopped. Repeat nothing."
 
 def ask_whole(call, messages, max_continues=2):
     
-    reply = None
-    temp = ""
-    
-    while max_continues!=0:
+    conversation = list(messages)
+    parts = []
 
-        reply = call(messages)
-        
-        if len(messages)>1:
-            max_continues-=1
-            if max_continues==0:
-                break
-        # print(reply)
-        if is_cut_off(reply)==True:
-            messages = messages + [assistant_message(text_of(reply))] + [user_message(CONTINUE)] 
-            temp += text_of(reply)
-            
-        else:
-            return ("".join([temp,text_of(reply)]), True)
-    
-    return ("".join([temp,text_of(reply)]), False)
+    for _ in range(max_continues + 1):
+        reply = call(conversation)
+        chunk = text_of(reply)
+        parts.append(chunk)
+
+        if not is_cut_off(reply):
+            return "".join(parts), True
+
+        conversation.extend([
+            assistant_message(chunk),
+            user_message(CONTINUE),
+        ])
+
+    return "".join(parts), False
