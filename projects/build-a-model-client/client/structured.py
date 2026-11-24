@@ -46,7 +46,6 @@ def find_problem(obj, schema):
 
 
 def correction(problem):
-    return {
-        'role':'user',
-        'content':f'That reply could not be used: {problem}. Send only the corrected JSON object.'
-    }
+    message = f'That reply could not be used: {problem}. Send only the corrected JSON object.'
+
+    return user_message(message)
