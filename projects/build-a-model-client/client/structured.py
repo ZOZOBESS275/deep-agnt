@@ -43,3 +43,10 @@ def find_problem(obj, schema):
             return f"the field '{field}' should be of type {schema[field].__name__}"
 
     return None
+
+
+def correction(problem):
+    return {
+        'role':'user',
+        'content':f'That reply could not be used: {problem}. Send only the corrected JSON object.'
+    }
