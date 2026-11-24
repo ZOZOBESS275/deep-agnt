@@ -28,3 +28,18 @@ def parse_json(text):
         
         except ValueError as e:
             return None
+
+
+def find_problem(obj, schema):
+    
+    if obj is None:
+        return "the reply was not a JSON object"
+    
+    for field in schema.keys():
+        if field not in obj:
+            return f"the field '{field}' is missing"
+
+        if schema[field] != type(obj[field]):
+            return f"the field '{field}' should be of type {schema[field].__name__}"
+
+    return None
