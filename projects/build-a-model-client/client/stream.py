@@ -1,15 +1,11 @@
 def text_delta(event):
     
-    delta = event.get('delta',[])
+    delta = event.get('delta',{})
     
-    if delta ==[]:
-        return ''
+    if delta.get('type')=='text_delta':
+        return delta.get('text','') 
     
-    if delta.get('type','')=='text_delta':
-        return delta['text'] 
-    
-    else:
-        return ''
+    return ''
 
 
 def join_stream(events):
