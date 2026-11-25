@@ -21,8 +21,13 @@ def join_stream(events):
 
 def stop_reason_of(events):
     
-    reason_stop = [event.get('delta',None)['stop_reason'] for event in events if event['type']=='message_delta']
-
-    if reason_stop==[]:
-        return None
-    return "".join(reason_stop)
+    reason_stop = next(
+    (
+        event.get("delta", {}).get("stop_reason")
+        for event in events
+        if event.get("type") == "message_delta"
+        ),
+        None,
+    )
+    
+    return reason_stop
