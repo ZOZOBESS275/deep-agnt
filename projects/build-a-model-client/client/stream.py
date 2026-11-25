@@ -5,7 +5,7 @@ def text_delta(event):
     if delta ==[]:
         return ''
     
-    elif delta['type']=='text_delta':
+    if delta['type']=='text_delta':
         return delta['text'] 
     
     else:
