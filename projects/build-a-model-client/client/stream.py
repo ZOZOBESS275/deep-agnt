@@ -27,3 +27,14 @@ def stop_reason_of(events):
     )
     
     return reason_stop
+
+
+def stream_reply(events):
+    
+    return {
+        'stop_reason': stop_reason_of(events),
+        'content':[{
+            'type':'text',
+            'text':join_stream(events)
+        }]
+    }
