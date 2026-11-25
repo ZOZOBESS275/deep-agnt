@@ -1,8 +1,8 @@
 def text_delta(event):
     
-    delta = event.get('delta','')
+    delta = event.get('delta',[])
     
-    if delta =='':
+    if delta ==[]:
         return ''
     
     elif delta['type']=='text_delta':
