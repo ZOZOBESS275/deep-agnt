@@ -49,3 +49,26 @@ def correction(problem):
     message = f'That reply could not be used: {problem}. Send only the corrected JSON object.'
 
     return user_message(message)
+
+
+def ask_json(call, prompt, schema, max_attempts=3):
+    
+    reply = None
+    messages = [user_message(prompt)]
+
+    for _ in range(max_attempts):
+
+        
+        reply = call(messages) 
+        json_object = parse_json(text_of(reply))
+        
+        json_test = find_problem(json_object,schema) 
+
+        if json_test==None:
+            return json_object
+        
+        else:
+            
+            messages = messages + [assistant_message(text_of(reply))] + [correction(json_test)]
+
+    return None
