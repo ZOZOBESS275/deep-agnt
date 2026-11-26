@@ -2,7 +2,7 @@
 
 The wrapper every team writes around a model API, as 27 small functions: hold a conversation, finish a cut-off reply, get JSON that validates, read a stream, retry a busy API and count what it cost.
 
-Built step by step on [Deep-Agnt](https://deep-agnt.com/projects/model-client): 20 of 27 steps passed, each graded by tests.
+Built step by step on [Deep-Agnt](https://deep-agnt.com/projects/model-client): 21 of 27 steps passed, each graded by tests.
 
 - [x] Step 1: A user message
 - [x] Step 2: An assistant message
@@ -24,3 +24,4 @@ Built step by step on [Deep-Agnt](https://deep-agnt.com/projects/model-client): 
 - [x] Step 18: Which errors are worth retrying
 - [x] Step 19: How long to wait
 - [x] Step 20: Retry with backoff
+- [x] Step 21: Price one call
