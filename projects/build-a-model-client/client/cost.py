@@ -24,3 +24,10 @@ def add_call(ledger, reply, price):
     new_ledger['micro']=price_call(new_ledger['input_tokens'], new_ledger['output_tokens'],price)
 
     return new_ledger
+
+
+def receipt(ledger):
+    
+    micro = (ledger['micro']/1000000)
+
+    return f'calls: {ledger['calls']} | in: {ledger['input_tokens']} | out: {ledger['output_tokens']} | cost: ${micro:.4f}'
