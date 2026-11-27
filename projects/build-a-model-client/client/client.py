@@ -21,3 +21,14 @@ def call(client, messages):
     client['ledger'] = add_call(client['ledger'], reply, client['price'])
 
     return reply
+
+
+def send(client, text):
+    
+    messages = client['history'] + [user_message(text)]
+
+    reply, _ = ask_whole(lambda messages:call(client,messages),messages)
+
+    client['history'] = add_turn(client['history'], text, reply)
+
+    return reply
