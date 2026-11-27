@@ -12,15 +12,8 @@ def parse_model_json(reply):
             return None
 
         else:
-        # reply.find('```')== -1:
             return json.loads(reply[start:end+1])
         
-        # else:
-                
-            
-        #     else:
-        #         print(reply[start:end])
-                # return json.loads()    
 
     except Exception:
         return None
