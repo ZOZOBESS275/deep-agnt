@@ -16,10 +16,12 @@ def call(client, messages):
     
     ask_func = lambda: ask(client['model'], messages=messages,system=client['system'])
 
-    reply = call_with_retry(fn=ask_func, sleep = client['sleep'])
+    try:
+        reply = call_with_retry(fn=ask_func, sleep = client['sleep'])
+    
+        client['ledger'] = add_call(client['ledger'], reply, client['price'])
 
-
-
-    client['ledger'] = add_call(client['ledger'], reply, client['price'])
-
+    except Exception:
+        raise
+    
     return reply
