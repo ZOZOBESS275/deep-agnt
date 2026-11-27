@@ -27,7 +27,7 @@ def send(client, text):
     
     messages = client['history'] + [user_message(text)]
 
-    reply, _ = ask_whole(lambda messages:call(client,messages),messages)
+    reply, _ = ask_whole(lambda msgs:call(client,msgs),messages)
 
     client['history'] = add_turn(client['history'], text, reply)
 
