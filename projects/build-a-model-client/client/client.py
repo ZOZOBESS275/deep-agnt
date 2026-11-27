@@ -32,3 +32,10 @@ def send(client, text):
     client['history'] = add_turn(client['history'], text, reply)
 
     return reply
+
+
+def send_json(client, prompt, schema):
+    
+    reply = ask_json(lambda msgs: call(client,msgs), prompt, schema)
+
+    return reply
