@@ -14,14 +14,10 @@ def new_client(model, price, system=None, sleep=time.sleep):
 
 def call(client, messages):
     
-    ask_func = lambda: ask(client['model'], messages=messages,system=client['system'])
-
-    try:
-        reply = call_with_retry(fn=ask_func, sleep = client['sleep'])
+    reply = call_with_retry(fn=lambda: ask(client['model'], messages=messages,system=client['system']),
+     sleep = client['sleep']
+     )
     
-        client['ledger'] = add_call(client['ledger'], reply, client['price'])
+    client['ledger'] = add_call(client['ledger'], reply, client['price'])
 
-    except Exception:
-        raise
-    
     return reply
