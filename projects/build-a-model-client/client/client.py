@@ -18,7 +18,7 @@ def call(client, messages):
 
     reply = call_with_retry(fn=ask_func, sleep = client['sleep'])
 
-    # reply = ask()
+
 
     client['ledger'] = add_call(client['ledger'], reply, client['price'])
 
